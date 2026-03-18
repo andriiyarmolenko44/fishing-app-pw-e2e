@@ -1,1 +1,1 @@
-e2e tests
+e2e tests for - https://github.com/andriiyarmolenko44/fishing-app
