@@ -4,13 +4,13 @@ import HomePage from "../../page_objects/HomePage";
 
 test.describe("Login", () => {
   test("Verify login with valid credentials(API)", async ({
-    authenticatedPage,
+    authenticatedAdminPage,
   }) => {
-    const profilePage = new ProfilePage(authenticatedPage);
-    const homePage = new HomePage(authenticatedPage);
+    const profilePage = new ProfilePage(authenticatedAdminPage);
+    const homePage = new HomePage(authenticatedAdminPage);
 
-    await authenticatedPage.goto("/");
-    await authenticatedPage.reload();
+    await authenticatedAdminPage.goto("/");
+    await authenticatedAdminPage.reload();
     await homePage.clickProfileLink();
 
     await expect(profilePage.userDisplayName).toHaveText(
@@ -21,12 +21,12 @@ test.describe("Login", () => {
     );
   });
 
-  test("Verify user can logout", async ({ authenticatedPage }) => {
-    const profilePage = new ProfilePage(authenticatedPage);
-    const homePage = new HomePage(authenticatedPage);
+  test("Verify user can logout", async ({ authenticatedAdminPage }) => {
+    const profilePage = new ProfilePage(authenticatedAdminPage);
+    const homePage = new HomePage(authenticatedAdminPage);
 
-    await authenticatedPage.goto("/");
-    await authenticatedPage.reload();
+    await authenticatedAdminPage.goto("/");
+    await authenticatedAdminPage.reload();
     await homePage.clickProfileLink();
 
     await expect(profilePage.userDisplayName).toHaveText(
