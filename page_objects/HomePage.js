@@ -33,7 +33,7 @@ export default class HomePage {
   async searchByRegion (region) {
     await this.regionInput.click();
     await this.regionInput.fill(region);
-    await this.page.getByText(region, { exact: true }).click();
+    await this.page.getByText(region, { exact: true }).first().click();
   }
 
   async searchByWaterType (water) {
@@ -43,17 +43,24 @@ export default class HomePage {
   async searchByFish (fish) {
     await this.fishTypeInput.click();
     await this.fishTypeInput.fill(fish);
-    await this.page.getByText(fish, { exact: true }).click();
+    await this.page.getByText(fish, { exact: true }).first().click();
   }
 
   async searchBySeason (season) {
     await this.seasonInput.click();
     await this.seasonInput.fill(season);
-    await this.page.getByText(season, { exact: true }).click();
+    await this.page.getByText(season, { exact: true }).first().click();
   }
 
-  async searchButtonClick () {
+  async searchByFilters () {
+    const responsePromise = this.page.waitForResponse(
+      (response) => 
+        response.url().includes("/locations?") &&
+        response.request().method() === "GET"
+    );
+
     await this.searchButton.click();
+    await responsePromise;
   }
 
   async openLocationCard (index = 0) {

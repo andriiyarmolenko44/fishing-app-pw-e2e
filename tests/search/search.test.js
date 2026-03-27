@@ -18,11 +18,7 @@ test.describe("search", () => {
     const region = "Kyiv";
 
     await homePage.searchByRegion(region);
-    await homePage.searchButtonClick();
-
-    await expect(homePage.loadingMessage).toBeVisible();
-    await expect(homePage.loadingMessage).toBeHidden();
-
+    await homePage.searchByFilters();
     await homePage.openLocationCard();
 
     await expect(locationDetailsPage.locationRegion).toContainText(region);
@@ -32,11 +28,7 @@ test.describe("search", () => {
     const water = "River";
 
     await homePage.searchByWaterType(water);
-    await homePage.searchButtonClick();
-
-    await expect(homePage.loadingMessage).toBeVisible();
-    await expect(homePage.loadingMessage).toBeHidden();
-
+    await homePage.searchByFilters();
     await homePage.openLocationCard();
 
     await expect(locationDetailsPage.locationWaterType).toContainText(water);
@@ -46,11 +38,7 @@ test.describe("search", () => {
     const fish = "Asp";
 
     await homePage.searchByFish(fish);
-    await homePage.searchButtonClick();
-
-    await expect(homePage.loadingMessage).toBeVisible();
-    await expect(homePage.loadingMessage).toBeHidden();
-
+    await homePage.searchByFilters();
     await homePage.openLocationCard();
 
     await expect(locationDetailsPage.getChipByText(fish)).toBeVisible();
@@ -60,11 +48,7 @@ test.describe("search", () => {
     const season = "Spring";
 
     await homePage.searchBySeason(season);
-    await homePage.searchButtonClick();
-
-    await expect(homePage.loadingMessage).toBeVisible();
-    await expect(homePage.loadingMessage).toBeHidden();
-
+    await homePage.searchByFilters();
     await homePage.openLocationCard();
 
     await expect(locationDetailsPage.getChipByText(season)).toBeVisible();
