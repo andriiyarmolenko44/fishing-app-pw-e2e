@@ -18,10 +18,8 @@ test.describe("search", () => {
     const region = "Kyiv";
 
     await homePage.searchByRegion(region);
-    const data = await homePage.searchByFilters(region.toUpperCase());
-
-    const firstLocationTitle = data.items[0].title;
-    await homePage.openLocationCardByTitle(firstLocationTitle);
+    await homePage.searchByFilters(region.toUpperCase());
+    await homePage.openLocationCard();
 
     await expect(locationDetailsPage.locationRegion).toContainText(region);
   });
@@ -30,10 +28,8 @@ test.describe("search", () => {
     const water = "River";
 
     await homePage.searchByWaterType(water);
-    const data = await homePage.searchByFilters(water.toUpperCase());
-
-    const firstLocationTitle = data.items[0].title;
-    await homePage.openLocationCardByTitle(firstLocationTitle);
+    await homePage.searchByFilters(water.toUpperCase());
+    await homePage.openLocationCard();
 
     await expect(locationDetailsPage.locationWaterType).toContainText(water);
   });
@@ -42,10 +38,8 @@ test.describe("search", () => {
     const fish = "Asp";
 
     await homePage.searchByFish(fish);
-    const data = await homePage.searchByFilters(fish);
-
-    const firstLocationTitle = data.items[0].title;
-    await homePage.openLocationCardByTitle(firstLocationTitle);
+    await homePage.searchByFilters(fish);
+    await homePage.openLocationCard();
 
     await expect(locationDetailsPage.getChipByText(fish)).toBeVisible();
   });
@@ -54,10 +48,8 @@ test.describe("search", () => {
     const season = "Spring";
 
     await homePage.searchBySeason(season);
-    const data = await homePage.searchByFilters(season.toUpperCase());
-
-    const firstLocationTitle = data.items[0].title;
-    await homePage.openLocationCardByTitle(firstLocationTitle);
+    await homePage.searchByFilters(season.toUpperCase());
+    await homePage.openLocationCard();
 
     await expect(locationDetailsPage.getChipByText(season)).toBeVisible();
   });
