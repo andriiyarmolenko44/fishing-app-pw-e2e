@@ -10,7 +10,7 @@ export default class HomePage {
     this.fishTypeInput = page.getByRole('textbox', { name: 'Fish (type to search)' });
     this.seasonInput = page.getByRole('textbox', { name: 'Seasons (type to search)' });
     this.searchButton = page.getByRole('button', { name: 'Search' });
-    this.locationCard = page.locator('div.location-card');
+    this.locationCards = page.locator('div.location-card');
     this.loadingMessage = page.getByText('Loading...');
   }
 
@@ -52,18 +52,26 @@ export default class HomePage {
     await this.page.getByText(season, { exact: true }).first().click();
   }
 
-  async searchByFilters () {
+  async searchByFilters (expectedPart) {
     const responsePromise = this.page.waitForResponse(
       (response) => 
         response.url().includes("/locations?") &&
+        response.url().includes(expectedPart) &&
         response.request().method() === "GET"
     );
 
     await this.searchButton.click();
-    await responsePromise;
+    const response = await responsePromise;
+    return await response.json();
   }
 
-  async openLocationCard (index = 0) {
-    await this.locationCard.nth(index).click();
+  getLocationCardByTitle(title) {
+    return this.locationCards.filter({ hasText: title });
+  }
+
+  async openLocationCardByTitle(title) {
+    const card = this.getLocationCardByTitle(title);
+    await card.first().waitFor({ state: "visible" });
+    await card.first().click();
   }
 }
