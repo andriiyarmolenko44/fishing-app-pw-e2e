@@ -7,8 +7,8 @@ export default class LoginPage {
   }
 
   async userLogin (email, password) {
-    this.emailTextBox.fill(email);
-    this.passwordTextBox.fill(password);
-    this.loginButton.click();
+    await this.emailTextBox.fill(email);
+    await this.passwordTextBox.fill(password);
+    await this.loginButton.click();
   }
 }
